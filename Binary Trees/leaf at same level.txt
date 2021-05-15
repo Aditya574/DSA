@@ -1,0 +1,26 @@
+    void solve(Node* root,bool& f,int k)
+    {
+        if(!root) return;
+        if(!root->left&&!root->right)
+        {
+            if(k!=1) f=0; 
+        }
+        solve(root->left,f,k-1);
+        solve(root->right,f,k-1);
+    }
+    int height(Node* root)
+    {
+        if(!root) return 0;
+        int x=height(root->left);
+        int y=height(root->right);
+        return 1+max(x,y);
+    }
+    bool check(Node *root)
+    {
+        //Your code here
+        bool f=1;
+        int k=height(root);
+        solve(root,f,k);
+        return f;
+    }
+};

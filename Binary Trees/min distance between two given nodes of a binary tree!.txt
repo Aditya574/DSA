@@ -1,0 +1,64 @@
+Node* solve(Node* root,int a,int b)
+ {
+     if(!root) return NULL;
+     if(root->data==a||root->data==b) return root;
+     Node* l =solve(root->left,a,b);
+     Node* r=solve(root->right,a,b);
+     if(l&&r) return root;
+     if(l) return l;
+     if(r) return r;
+     return NULL;
+ }
+ void solve1(Node* root,int a,int& x)
+ {
+     if(!root) return;
+     queue<Node*>q;
+     q.push(root);
+     while(!q.empty())
+     {
+         Node* temp;
+         int t=q.size();
+         while(t--)
+         {
+             temp= q.front();
+             if(temp->data==a) return;
+             if(temp->left) q.push(temp->left);
+             if(temp->right) q.push(temp->right);
+         
+             q.pop();
+         }
+         x++;
+  }
+ }
+  void solve2(Node* root,int b,int& y)
+ {
+     if(!root) return;
+     queue<Node*>q;
+     q.push(root);
+     while(!q.empty())
+     {
+         Node* temp;
+         int t=q.size();
+         while(t--)
+         {
+             temp= q.front();
+             if(temp->data==b) return;
+             if(temp->left) q.push(temp->left);
+             if(temp->right) q.push(temp->right);
+         
+             q.pop();
+         }
+         y++;
+  }
+ }
+ 
+int findDist(Node* root, int a, int b) {
+    // Your code here
+    Node* lca=solve(root,a,b);
+    int x=0;
+    solve1(lca,a,x);
+    int y=0;
+    solve2(lca,b,y);
+    return x+y;
+    
+}

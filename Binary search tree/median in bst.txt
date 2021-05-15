@@ -1,0 +1,17 @@
+void solve(Node* root,vector<int>& v)
+{
+    if(!root) return;
+    solve(root->left,v);
+    v.push_back(root->data);
+    solve(root->right,v);
+}
+float findMedian(struct Node *root)
+{
+      //Code here
+      ///float ans;
+      vector<int> v;
+      solve(root,v);
+      if(v.size()%2!=0) return v[v.size()/2];
+      else
+      return float(float(v[v.size()/2]+v[(v.size()/2)-1])/float(2));
+}

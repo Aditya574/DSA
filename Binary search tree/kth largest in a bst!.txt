@@ -1,0 +1,23 @@
+    void solve(Node* root,int& val,int& K)
+    {
+        if(!root) return ;
+        if(K<=0) return;
+        solve(root->right,val,K);
+        K--;
+        if(K==0) 
+        {
+            val=root->data; 
+            return;
+            
+        }
+        solve(root->left,val,K);
+    }
+    int kthLargest(Node *root, int K)
+    {
+        //Your code here
+         int val=-1;
+        solve(root,val,K);
+        return val;
+        
+    }
+};

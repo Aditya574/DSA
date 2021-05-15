@@ -1,0 +1,35 @@
+Node* util(Node* root)
+{
+    while(root->right)
+    {
+        root=root->right;
+    }
+    return root;
+}
+Node *deleteNode(Node *root,  int X)
+{
+    // your code goes here
+    if(!root) return NULL;
+    if(root->data==X)
+    {
+        if(!root->left&&!root->right) return NULL;
+        if(root->left&&root->right) 
+        {
+            Node* temp=util(root->left);
+            root->data=temp->data;
+            root->left=deleteNode(root->left,temp->data);
+            return root;
+        }
+        if(root->left) return root->left;
+        if(root->right) return root->right;
+        
+    }
+    if(root->data<X)
+    {
+        deleteNode(root->right,X);
+    }
+    else 
+    deleteNode(root->left,X);
+    return root;
+    
+}

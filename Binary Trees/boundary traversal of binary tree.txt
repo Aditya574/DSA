@@ -1,0 +1,38 @@
+void solvel(Node* root,vector<int>& v)
+{
+    if(!root) return ;
+    if(root->left || root->right) 
+    v.push_back(root->data);
+    if(root->left) solvel(root->left,v);
+    else if (root->right) solvel(root->right,v);
+}
+void solver(Node* root,vector<int>& v)
+{
+    if(!root) return ;
+   
+    if(root->right) solver(root->right,v);
+    else if (root->left) solver(root->left,v);
+    if(root->left || root->right) 
+    v.push_back(root->data);
+}
+void leaf(Node* root,vector<int>& v)
+{
+    if(!root) return ;
+    leaf(root->left,v);
+    if(!root->left&&!root->right)
+    v.push_back(root->data);
+    leaf(root->right,v);
+}
+vector <int> printBoundary(Node *root)
+{
+     //Your code here
+     vector<int> v;
+     if(!root)  
+     return v;
+     v.push_back(root->data);
+     if(!root->left && !root ->right) return v;
+     solvel(root->left,v);
+     leaf(root,v);
+     solver(root->right,v);
+     return v;
+}

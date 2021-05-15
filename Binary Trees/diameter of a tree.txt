@@ -1,0 +1,29 @@
+1)
+int solve(Node* root,int& m)
+{
+    if(!root) return 0;
+    int x=solve(root->left,m);
+    int y=solve(root->right,m);
+    int temp=max(x,y)+1;
+    int ans=max(temp,x+y+1);
+    m=max(ans,m);
+    return temp;
+}
+2)
+int solve(Node* root,int& m)
+{
+    if(!root) return 0;
+    int x=solve(root->left,m);
+    int y=solve(root->right,m);
+    if(1+x+y>m)
+       m=1+x+y;
+    return max(x,y)+1;
+
+}
+int diameter(Node* root) {
+    int m=INT_MIN;
+    solve(root,m);
+    return m;
+    
+}
+

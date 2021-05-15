@@ -1,0 +1,22 @@
+class Solution
+{
+    
+    public:
+    int solve(Node* root,bool& f)
+    {
+        if(!root) return 0;
+        if(!root->left&&!root->right) return root->data;
+        int sl=solve(root->left,f);
+        int sr=solve(root->right,f);
+        if(root->data!=sl+sr) f=0;
+        return root->data+sl+sr;
+    }
+    bool isSumTree(Node* root)
+    {
+         // Your code here
+         bool f=1;
+         solve(root,f);
+         return f;
+         
+    }
+};

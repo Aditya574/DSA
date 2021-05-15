@@ -1,0 +1,22 @@
+bool solve(Node* root,int S,int currs,bool& f)
+{
+    if(!root) return 0;
+    currs+=root->data;
+    if(!root->left && !root->right) 
+    if(currs==S) f=1;
+  
+    solve(root->left,S,currs,f);
+    solve(root->right,S,currs,f);
+}
+class Solution
+{
+    public:
+    bool hasPathSum(Node *root, int S) {
+    // Your code here
+    bool f=0;
+    int currs=0;
+    solve(root,S,currs,f);
+    return f;
+    
+}
+};

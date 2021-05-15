@@ -1,0 +1,14 @@
+TreeNode* solve1(vector<int>nums,int l,int r)
+{
+    if(l>r) return NULL;
+    int mid=(l+r)/2;
+    TreeNode* temp=new TreeNode(nums[mid]);
+    temp->left=solve1(nums,l,mid-1);
+    temp->right=solve1(nums,mid+1,r);
+    return temp;
+}
+    
+    TreeNode* sortedArrayToBST(vector<int>& nums) {
+        return solve1(nums,0,nums.size()-1);
+      }
+};

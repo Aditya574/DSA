@@ -1,0 +1,23 @@
+void solve(Node* root,int l,int h,int& count)
+{
+    if(!root) return;
+    queue<Node*> q;
+    q.push(root);
+    while(!q.empty())
+    {
+        Node* temp=q.front();
+        q.pop();
+        if(temp->data>=l && temp->data<=h) count++;
+        if(root->data>l)
+        if(temp->left) solve(temp->left,l,h,count); 
+        if(root->data<h)
+        if(temp->right) solve(temp->right,l,h,count);
+    }
+}
+int getCount(Node *root, int l, int h)
+{
+  // your code goes here   
+  int count=0;
+  solve(root,l,h,count);
+  return count;
+}

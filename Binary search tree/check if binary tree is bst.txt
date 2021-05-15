@@ -1,0 +1,47 @@
+   void solve(Node* root,vector<int>& v)
+    {
+        if(!root) return;
+        solve(root->left,v);
+        v.push_back(root->data);
+        solve(root->right,v);
+        
+    }
+    bool isBST(Node* root) 
+    {
+        // Your code here
+        bool f=1;
+        vector<int>v;
+        solve(root,v);
+        for(int i=0;i<v.size()-1;i++)
+        {
+            if(v[i]>=v[i+1]) 
+            { f=0; 
+              break;
+            }
+        }
+        return f;
+    }
+
+#####################################
+
+   void solve(Node* root,int a,int b,bool& f)
+   {
+       if(!root) return;
+       if(root->data<a||root->data>b) {
+           f=0;
+           return;
+       }
+       if(a>b) return ;
+       solve(root->left,a,root->data-1,f);
+       solve(root->right,root->data+1,b,f);
+   }
+    bool isBST(Node* root) 
+    {
+        // Your code here
+        bool f=1;
+        int a=INT_MIN;
+        int b=INT_MAX;
+        solve(root,a,b,f);
+        return f;
+        
+    }

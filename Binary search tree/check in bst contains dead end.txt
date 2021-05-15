@@ -1,0 +1,23 @@
+void solve(Node* root,int l,int r,bool& f)
+{
+    if(!root) return;
+    if(f) return;
+    if(!root->left&&!root->right){
+    if(l==r) {
+        f=1;
+        
+    }
+    return;
+    }
+    solve(root->left,l,root->data-1,f);
+    solve(root->right,root->data+1,r,f);
+}
+bool isDeadEnd(Node *root)
+{
+    //Your code here
+    bool f=0;
+    int l=INT_MIN;
+    int r=INT_MAX;
+    solve(root,l,r,f);
+    return f;
+}

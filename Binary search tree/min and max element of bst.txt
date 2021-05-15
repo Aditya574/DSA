@@ -1,0 +1,21 @@
+int findMax(struct node* root)
+{
+// Your code goes here
+   while(root->right)
+   {
+       root=root->right;
+   }
+   return root->data;
+}
+
+// Returns minimum value in a given Binary Tree
+int findMin(struct node* root)
+{
+// Your code goes here
+  while(root->left)
+  {
+      root=root->left;
+      
+  }
+  return root->data;
+}

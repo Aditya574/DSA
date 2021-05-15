@@ -1,0 +1,53 @@
+void solve(Node* root,vector<int>& v)
+    {
+        if(!root) return;
+        solve(root->left,v);
+        v.push_back(root->data);
+        solve(root->right,v);
+    }
+    vector<int>merge(vector<int>v1,vector<int>v2)
+    {
+        int n1=v1.size();
+        int n2=v2.size();
+        vector<int> z;
+        int i=0,j=0;
+        while(i<n1&&j<n2)
+        {
+            if(v1[i]<v2[j]) 
+            {
+                z.push_back(v1[i]);
+                i++;
+            }
+            else
+            {
+                z.push_back(v2[j]);
+                j++;
+            }
+        }
+        if(i<n1)
+        {
+            for(int k=i;k<n1;k++)
+            {
+                z.push_back(v1[k]);
+            }
+        }
+        else
+        {
+            for(int t=j;t<n2;t++)
+            {
+                z.push_back(v2[t]);
+            }
+        }
+        return z;
+    }
+    vector<int> merge(Node *root1, Node *root2)
+    {
+       //Your code here
+       vector<int>v1;
+       vector<int>v2;
+       solve(root1,v1);
+       solve(root2,v2);
+       return merge(v1,v2);
+       
+    }
+};

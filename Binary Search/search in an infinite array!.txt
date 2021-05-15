@@ -1,0 +1,8 @@
+int start=0;
+int end=1;
+while(k>arr[high])
+{
+   start=high;
+   high=high*2;
+}
+solve(arr,start,high);// nomral binary search

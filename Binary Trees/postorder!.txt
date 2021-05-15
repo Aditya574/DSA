@@ -1,0 +1,14 @@
+void solve(Node* root,vector<int>& a)
+{
+    if(!root) return;
+     
+    solve(root->left,a);
+    solve(root->right,a);
+     a.push_back(root->data);
+}
+vector<int> postOrder(Node* root)
+{
+  vector<int>a;
+  solve(root,a);
+  return a;
+}

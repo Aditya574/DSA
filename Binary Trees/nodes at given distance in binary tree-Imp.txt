@@ -1,0 +1,82 @@
+    void find()// adding elements of every level from the target
+    {
+        while(1)
+        {
+            Node* temp=q.front();
+            q.pop();
+            if(!temp)
+            {
+                if(!q.empty())
+                {
+                    q.push(NULL);
+                }
+                return ;
+            }
+            if(temp->left&&s.find(temp->left)==s.end())
+            {
+                s.insert(temp->left);
+                q.push(temp->left);
+            }
+             if(temp->right&&s.find(temp->right)==s.end())
+            {
+                s.insert(temp->right);
+                q.push(temp->right);
+            }
+             if(m[temp]&&s.find(m[temp])==s.end())
+            {
+                s.insert(m[temp]);
+                q.push(m[temp]);
+            }
+        }
+    }
+   void parent(Node* root,Node* root2)// for adding parent of every node
+   {
+       if(!root) return ;
+       m[root]=root2;
+       parent(root->left,root);
+       parent(root->right,root);
+   }
+    
+    Node* solve(Node* root,int target)// getting target pointer
+    {
+        if(!root) return NULL;
+        if(root->data==target) return root;
+        Node* l=solve(root->left,target);
+        if(l) return l;
+        Node* r=solve(root->right,target);
+        if(r) return r;
+        return NULL;
+    }
+
+    vector <int> KDistanceNodes(Node* root, int target , int k)
+    {
+        // return the sorted vector of all nodes at k dist
+        vector<int> v;
+        if(!root) return v;
+        Node* temp=solve(root,target);
+        parent(root,NULL);
+        q.push(temp);
+        s.insert(temp);
+        q.push(NULL);
+        int t=0;
+        while(!q.empty())
+        {
+            if(t==k)
+            {
+                while(!q.empty())
+                {
+                    Node* temp=q.front();
+                    q.pop();
+                    if(temp) v.push_back(temp->data);
+                }
+                sort(v.begin(),v.end());
+                return v;
+            }
+            t++;
+            find();
+        }
+        return v;
+        
+        
+    }
+};

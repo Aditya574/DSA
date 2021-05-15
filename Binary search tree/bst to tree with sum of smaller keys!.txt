@@ -1,0 +1,8 @@
+void sum(Node* root,int& sum)
+{
+  if(!root) return;
+  sum(root->left,sum);
+   sum+=root->data;
+   root->data=sum;
+   sum(root->right,sum);
+}

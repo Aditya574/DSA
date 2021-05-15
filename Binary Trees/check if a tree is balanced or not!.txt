@@ -1,0 +1,17 @@
+int solve(Node* root,bool& f)
+{
+    if(!root) return 0;
+    int x=solve(root->left,f);
+    int y=solve(root->right,f);
+    if(abs(x-y)>1) f=0;
+    return 1+max(x,y);
+}
+
+
+bool isBalanced(Node *root)
+{
+    bool f=1;
+    solve(root,f);
+    return f;
+    
+}

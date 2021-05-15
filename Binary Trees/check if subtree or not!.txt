@@ -1,0 +1,24 @@
+class Solution {
+public:
+     bool solve(TreeNode* r1,TreeNode* r2)
+    {
+        if(!r1&&!r2) return 1;
+        if(!r1||!r2) return 0;
+        if(r1->val!=r2->val) return 0;
+        return solve(r1->left,r2->left)&&solve(r1->right,r2->right);
+    }
+    bool isSubtree(TreeNode* s, TreeNode* t) {
+        queue<TreeNode*>q;
+        q.push(s);
+        while(!q.empty())
+        {
+            TreeNode*temp=q.front();
+            q.pop();
+            if(temp->val==t->val){
+            if(solve(temp,t)) return 1;}
+            if(temp->left) q.push(temp->left);
+            if(temp->right) q.push(temp->right);
+        }
+        return 0;
+    }
+};
